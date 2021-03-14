@@ -73,7 +73,6 @@ def signup():
     if request.method == "POST":
       #get the request form data
       email = request.form["email"]
-      username = request.form["username"]
       password = request.form["password"]
       try:
         #create the user
@@ -83,9 +82,7 @@ def signup():
         #session
         user_id = user['idToken']
         user_email = email
-        user_username = username
         session['usr'] = user_id
-        seession['username'] = user_username
         session["email"] = user_email
         return redirect("/")
       except:
@@ -132,62 +129,33 @@ def logout():
 @app.route("/create", methods=["GET", "POST"])
 @isAuthenticated
 def create():
-
   if request.method == "POST":
-    #get the request data
-    upload = request.file['upload']
+    if os.path.isdir('photos/' + session["email"]):
+      app.config['UPLOAD_PATH'] = 'photos/' + session["email"]
+      #get the request data
+      uploaded_file = request.files["upload"]
 
-    post = {
-      "title": title,
-      "content": content,
-      "author": session["email"]
-    }
-
-    try:
-      #print(title, content, file=sys.stderr)
-
-      #push the post object to the database
-      db.child("images/picture1.jpg").push(upload)
-      return redirect("/")
-    except:
-      return render_template("create.html", message= "Something wrong happened")
-
+      filename = secure_filename(uploaded_file.filename)
+      if filename != '':
+          file_ext = os.path.splitext(filename)[1]
+          if file_ext not in app.config['UPLOAD_EXTENSIONS'] or \
+                  file_ext != validate_image(uploaded_file.stream):
+              abort(400)
+          uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+    else:
+      os.makedir(session["email"])
   return render_template("create.html")
 
 
-@app.route("/post/<id>")
+@app.route("/post")
 @isAuthenticated
-def post(id):
-    orderedDict = db.child("Posts").order_by_key().equal_to(id).limit_to_first(1).get()
-    print(orderedDict, file=sys.stderr)
-
-    return render_template("post.html", data=orderedDict)
-
-@app.route("/edit/<id>", methods=["GET", "POST"])
-def edit(id):
-    if request.method == "POST":
-
-      title = request.form["title"]
-      content = request.form["content"]
-
-      post = {
-        "title": title,
-        "content": content,
-        "author": session["email"]
-      }
-
-      #update the post
-      db.child("Posts").child(id).update(post)
-      return redirect("/post/" + id)
-
-
-    orderedDict =  db.child("Posts").order_by_key().equal_to(id).limit_to_first(1).get()
-    return render_template("edit.html", data=orderedDict)
-
-@app.route("/delete/<id>", methods=["POST"])
-def delete(id):
-    db.child("Posts").child(id).remove()
-    return redirect("/")
+def post():
+    pics = os.listdir('photos/' + session["email"])
+    for photo in pics:
+      image = Image.open('photos/' + session["email"]+ "/" + photo)
+      for (tag,value) in image._getexif().iteritems():
+        print (TAGS.get(tag), value)
+    return render_template("post.html", pics = pics)
 
 
 #run the main script
