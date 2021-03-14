@@ -5,7 +5,7 @@ from google.cloud import vision
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "emapped-8b4be6305e9a.json"
 
 client = vision.ImageAnnotatorClient()
-file_name = os.path.abspath('IMG_5385.jpg')
+file_name = os.path.abspath('image.jpeg')
 
 with io.open(file_name, 'rb') as image_file:
     content = image_file.read()
