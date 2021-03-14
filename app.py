@@ -97,7 +97,7 @@ def login():
         return render_template("login.html", message="Wrong Credentials" )
 
 
-    return render_template("login.html")
+    return render_template("login.html", message=None)
 
 #logout route
 @app.route("/logout")

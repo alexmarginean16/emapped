@@ -6,14 +6,19 @@
 <div class="container">
 	<div class="content">
 		<div class="form">
-			<h1 class="huge-title">Hey &#x1F44B&#x1F3FB</h1>
-			<input type="text" placeholder="Username" name="" class="input">
-			<input type="password" placeholder="Password" name="" class="input">
+			<form method="POST" action="{{ url_for ('login')}}">
+				{% if message %}
+				<p class="error">{{message}}</p>
+				{% endif %}
+				<h1 class="huge-title">Hey &#x1F44B&#x1F3FB</h1>
+				<input type="email" placeholder="Email" name="email" class="input">
+				<input type="password" placeholder="Password" name="password" class="input">
 
-			<div style="overflow: hidden;">
-				<input type="submit" value="Log in" name="" class="submit">
-			</div>
-			<center><p>Don't have an acccount yet? Register <a href="{{ url_for('signup') }}">here</a></p></center>
+				<div style="overflow: hidden;">
+					<input type="submit" value="Login" name="" class="submit">
+				</div>
+				<center><p>Don't have an acccount yet? Register <a href="{{ url_for('signup') }}">here</a></p></center>
+			</form>
 		</div>
 	</div>
 </div>
