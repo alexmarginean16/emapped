@@ -58,6 +58,165 @@ p {
 	min-height: 460px;
 }
 
+/* ---- ---- ---- ---- HEADER ---- ---- ---- ---- */
+
+header {
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+}
+
+header h1 {
+  display: inline;
+}
+
+header h1 {
+  display: inline-block;
+}
+
+header .nav-btn {
+  display: none;
+}
+
+header nav {
+  display: inline;
+  float: right;
+  font-size: 17px;
+}
+
+header nav a {
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+}
+
+header nav .selected {
+  background: #3d5af1;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+header nav a:hover {
+	color: #22d1ee;
+}
+
+header #nav-check {
+  display: none;
+}
+
+/* ---------- GRID VIEW ---------- */
+
+.flex-grid {
+	display: grid;
+  	grid-gap: 40px;
+  	grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr);
+  	margin-top: 30px;
+}
+
+.box {
+	box-shadow:0 16px 40px rgba(0,0,0,0.12);
+	border-radius: 15px;
+	min-height: 200px;
+	overflow: hidden;
+}
+
+.box img {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.box h3 {
+	padding: 6px 10px 10px 10px;
+	color: #0e153a;
+}
+
+.box h4 {
+	padding: 8px 12px 12px 12px;
+	color: #0e153a;
+}
+
+a {
+	cursor: pointer;
+}
+
+/*
+#e2f3f5 - bluish white
+#22d1ee - cyan
+#3d5af1 - purpleish blue
+#0e153a - dark blue
+*/
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  font-family: 'MuliBold';
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 20px;
+  margin: 15% auto; /* 15% from the top and centered */
+  /*padding: 20px;*/
+  width: 40%; /* Could be more or less, depending on screen size */
+  overflow: hidden;
+}
+
+.modal-content img {
+	width: 100%;
+}
+
+.modal-content .modal-text {
+	padding: 20px;
+}
+
+.modal-content .modal-text h1 {
+	margin-bottom: 10px;
+}
+
+.modal-content .modal-text .emotion{
+	margin-bottom: 5px;
+}
+
+.modal-content .modal-text .emotion p {
+	float: left;
+	margin: 0px 10px 0px 0px;
+}
+
+.star {
+	color: gold;
+}
+
+.modal-content .modal-text p {
+	margin:;
+}
+
+/* The Close Button */
+.close {
+  color: #ffffff;
+  float: right;
+  font-size: 60px;
+  font-weight: bold;
+  position: absolute;
+  right: 32%;
+}
+
+.close:hover,
+.close:focus {
+  color: #22d1ee;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* ---------- LOGIN PAGE ---------- */
 
 .form {
@@ -109,8 +268,11 @@ p {
 	padding-left: 20px;
 }
 
-/* ---------- FOOTER ---------- */
+/* ---------- RESPONSIVE ---------- */
 
-
-
+@media (max-width: 600px) {
+  .flex-grid {
+    display: block;
+  }
+}
 

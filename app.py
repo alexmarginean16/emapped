@@ -52,6 +52,21 @@ def index():
     else:
       return render_template("index.html", posts=allposts)
 
+@app.route("/map")
+@isAuthenticated
+def map():
+    allposts = db.child("Posts").get()
+    if allposts.val() == None:
+      #print(posts, file=sys.stderr)
+      return render_template("map.html")
+    else:
+      return render_template("map.html", posts=allposts)
+
+@app.route("/profile")
+@isAuthenticated
+def profile():
+  return 'Profile'
+
 #signup route
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
