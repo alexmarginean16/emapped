@@ -24,14 +24,14 @@
 <div class="container">
 	<div class="content">
 		<div class="form">
-			<form method="POST" action="{{ url_for ('upload')}}">
+			<form method="POST" action="{{ url_for ('upload')}}" enctype="multipart/form-data">
 				{% if message %}
 				<p class="error">{{ message }}</p>
 				{% endif %}
 				<h1 class="huge-title">Upload a photo &#x1F4F7</h1>
 
 				<div class="file-input">
-					<input type="file" id="file" class="file">
+					<input type="file" name="upload" id="file" class="file">
 					<label for="file"><span class="file-name">Select file</span></label>
 				</div>
 
