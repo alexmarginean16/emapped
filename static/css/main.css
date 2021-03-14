@@ -1,0 +1,121 @@
+/*
+#e2f3f5 - bluish white
+#22d1ee - cyan
+#3d5af1 - purpleish blue
+#0e153a - dark blue
+*/
+
+/* ---------- GLOBAL ---------- */
+@font-face {
+  font-family: "MuliLight";
+  src: url('../fonts/Muli-Light.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: "Muli";
+  src: url('../fonts/Muli.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: "MuliSemiBold";
+  src: url('../fonts/Muli-SemiBold.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: "MuliBold";
+  src: url('../fonts/Muli-Bold.ttf')  format('truetype');
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Muli";
+	background-color: #e2f3f5;
+	color: #0e153a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	color: #3d5af1;
+	text-decoration: none;
+}
+
+p {
+	font-size: 17px;
+	font-family: "MuliLight";
+}
+
+.container {
+	width: 92%;
+	margin: 0 auto;
+}
+
+.content {
+	min-height: 460px;
+}
+
+/* ---------- LOGIN PAGE ---------- */
+
+.form {
+	width: 40%;
+	margin: 0 auto;
+	margin-top: 150px;
+}
+
+.huge-title {
+	font-size: 3.6em;
+	margin-bottom: 25px;
+}
+
+.form .input {
+	width: 100%;
+	font-family: "MuliLight";
+	font-color: #0e153a;
+	font-size: 17px;
+	border-radius: 15px;
+	border: 0px;
+	height: 55px;
+	outline: none;
+	margin-bottom: 22px;
+	box-shadow:0 16px 40px rgba(0,0,0,0.12);
+}
+
+.submit {
+	background: #3d5af1;
+	color: #ffffff;
+	font-family: "MuliLight";
+	height: 40px;
+	width: 170px;
+	font-size: 17px;
+	border-radius: 15px;
+	border: 0px;
+	height: 45px;
+	outline: none;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	float: right;
+}
+
+.form input::placeholder {
+	color: #0e153a;
+	padding-left: 20px;
+}
+
+.form input::text {
+	padding-left: 20px;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+
+}
+
+
+
+
+
