@@ -83,7 +83,9 @@ def signup():
         #session
         user_id = user['idToken']
         user_email = email
+        user_username = username
         session['usr'] = user_id
+        seession['username'] = user_username
         session["email"] = user_email
         return redirect("/")
       except:
