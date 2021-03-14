@@ -4,6 +4,7 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 #coming from pyrebase4
 import pyrebase
+from google.cloud import vision
 
 #firebase config
 config = {
