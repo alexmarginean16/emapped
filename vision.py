@@ -10,8 +10,6 @@ file_name = os.path.abspath('image.jpeg')
 with io.open(file_name, 'rb') as image_file:
     content = image_file.read()
 
-
-
 image = vision.Image(content=content)
 
 # Performs label detection on the image file
