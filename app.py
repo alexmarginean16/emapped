@@ -73,6 +73,7 @@ def signup():
     if request.method == "POST":
       #get the request form data
       email = request.form["email"]
+      username = request.form["username"]
       password = request.form["password"]
       try:
         #create the user
@@ -82,7 +83,9 @@ def signup():
         #session
         user_id = user['idToken']
         user_email = email
+        user_username = username
         session['usr'] = user_id
+        seession['username'] = user_username
         session["email"] = user_email
         return redirect("/")
       except:
@@ -112,7 +115,7 @@ def login():
         return render_template("login.html", message="Wrong Credentials" )
 
 
-    return render_template("login.html", message=None)
+    return render_template("login.html")
 
 #logout route
 @app.route("/logout")
