@@ -7,10 +7,12 @@
 	<title>Emapped | {% block title %}{% endblock %}</title>
 	<!--<link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}">-->
 
+	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
-<body>
+<body style="{% block bodystyle %}{% endblock %}">
 	{% block body %}{% endblock %}
 
 	<footer>

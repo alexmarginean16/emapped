@@ -2,13 +2,116 @@
 
 {% block title %}Home{% endblock %}
 
+{% block bodystyle %}background: #ffffff{% endblock %}
+
 {% block body %}
+	<header>
+		<div class="container">
+			<input type="checkbox" id="nav-check">
+			<div class="nav-header">
+			    <h1>eMapper &#x1F5FA</h1>
+			    <div class="nav-btn">
+				    <i class="fas fa-bars"></i>
+			  	</div>
+			  	<nav>
+			  		<a href="{{ url_for('index') }}" class="selected">Grid View</a>
+				    <a href="{{ url_for('map') }}">Map View</a>
+				    <a href="{{ url_for('profile') }}">Profile</a>
+			  	</nav>
+			</div>
+		</div>
+	</header>
+
 	<div class="container">
-		<h1>Hey!</h1>
+		<div class="flex-grid">
+			<div class="col">
+				<a id="myBtn">
+					<div class="box">
+						<img src="{{ url_for('static', filename='img/image.png') }}">
+						<h4>&#x1F4CD San Francisco</h4>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="">
+					<div class="box">
+						<img src="{{ url_for('static', filename='img/image.png') }}">
+						<h4>&#x1F4CD San Francisco</h4>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="">
+					<div class="box">
+						<img src="{{ url_for('static', filename='img/image.png') }}">
+						<h4>&#x1F4CD San Francisco</h4>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="">
+					<div class="box">
+						<img src="{{ url_for('static', filename='img/image.png') }}">
+						<h4>&#x1F4CD San Francisco</h4>
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
 
-	<div id="app">
-		{{ message }}
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<img src="{{ url_for('static', filename='img/image.png') }}">
+			<div class="modal-text">
+				<h1>&#x1F4CD San Francisco</h1>
+				<div class="emotion">
+					<p>Joy</p>
+					<a href="#" class="fas fa-star s1 star"></a>
+					<a href="#" class="fas fa-star s2 star"></a>
+					<a href="#" class="fas fa-star s3 star"></a>
+					<a href="#" class="fas fa-star s4 star"></a>
+					<a href="#" class="fas fa-star s5"></a>
+				</div>
+				<div class="emotion">
+					<p>Happiness</p>
+					<a href="#" class="fas fa-star s1"></a>
+					<a href="#" class="fas fa-star s2"></a>
+					<a href="#" class="fas fa-star s3"></a>
+					<a href="#" class="fas fa-star s4"></a>
+					<a href="#" class="fas fa-star s5"></a>
+				</div>
+				<p>Hashtags: #san #fran</p>
+			</div>
+		</div>
 	</div>
+
+	<script type="text/javascript">
+		// Get the modal
+		var modal = document.getElementById("myModal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
 
 {% endblock %}
