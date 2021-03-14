@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block bodystyle %}background: #ffffff{% endblock %}
+
+{% block body %}
+	<header>
+		<div class="container">
+			<input type="checkbox" id="nav-check">
+			<div class="nav-header">
+			    <h1>eMapper &#x1F5FA</h1>
+			    <div class="nav-btn">
+				    <i class="fas fa-bars"></i>
+			  	</div>
+			  	<nav>
+			  		<a href="{{ url_for('upload') }}">+</a>
+			  		<a href="{{ url_for('index') }}">Grid View</a>
+				    <a href="{{ url_for('map') }}">Map View</a>
+				    <a href="{{ url_for('profile', email=email) }}" class="selected">Profile</a>
+			  	</nav>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<center>
+			<img src="{{ url_for('static', filename='img/profilepic.png') }}" class="profile-pic">
+			<h1>{{ email }}</h1>
+			<p>Bio ...</p>
+			<p>1024 photos</p>
+			{% if loginuser == 1 %}
+				<a href="{{ url_for('logout') }}" class="logout">Logout</a>
+			{% endif %}
+		</center>
+
+	</div>
+
+{% endblock %}

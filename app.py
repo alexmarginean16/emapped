@@ -40,32 +40,31 @@ def isAuthenticated(f):
         return f(*args, **kwargs)
     return decorated_function
 
-#index route
 @app.route("/")
 @isAuthenticated
 def index():
-    allposts = db.child("Posts").get()
-    #print(allposts.val(), file=sys.stderr)
-    if allposts.val() == None:
-      #print(posts, file=sys.stderr)
-      return render_template("index.html")
-    else:
-      return render_template("index.html", posts=allposts)
+    return render_template("index.html", email=session["email"])
 
 @app.route("/map")
 @isAuthenticated
 def map():
-    allposts = db.child("Posts").get()
-    if allposts.val() == None:
-      #print(posts, file=sys.stderr)
-      return render_template("map.html")
-    else:
-      return render_template("map.html", posts=allposts)
+    return render_template("map.html", email=session["email"])
 
-@app.route("/profile")
+@app.route("/profile/<email>")
 @isAuthenticated
-def profile():
-  return 'profile'
+def profile(email):
+  loginuser = 0
+  if email == session["email"]:
+    loginuser = 1
+  return render_template('profile.html', email=email, loginuser=loginuser)
+
+@app.route("/upload", methods=["GET", "POST"])
+@isAuthenticated
+def upload():
+  if request.method == "POST":
+    return "POST"
+
+  return render_template('upload.html', email=session["email"])
 
 #signup route
 @app.route("/signup", methods=["GET", "POST"])
