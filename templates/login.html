@@ -3,18 +3,18 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div class="content">
-			<div class="form">
-				<h1 class="huge-title">Hey &#x1F44B&#x1F3FB</h1>
-				<input type="text" placeholder="Username" name="" class="input">
-				<input type="text" placeholder="Password" name="" class="input">
+<div class="container">
+	<div class="content">
+		<div class="form">
+			<h1 class="huge-title">Hey &#x1F44B&#x1F3FB</h1>
+			<input type="text" placeholder="Username" name="" class="input">
+			<input type="password" placeholder="Password" name="" class="input">
 
-				<div style="overflow: hidden;">
-					<input type="submit" value="Log in" name="" class="submit">
-				</div>
-				<center><p>Don't have an acccount yet? Register <a href="">here</a></p></center>
+			<div style="overflow: hidden;">
+				<input type="submit" value="Log in" name="" class="submit">
 			</div>
+			<center><p>Don't have an acccount yet? Register <a href="{{ url_for('signup') }}">here</a></p></center>
 		</div>
 	</div>
+</div>
 {% endblock %}

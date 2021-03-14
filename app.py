@@ -36,12 +36,13 @@ def isAuthenticated(f):
     def decorated_function(*args, **kwargs):
         #check for the variable that pyrebase creates
         if not auth.current_user != None:
-            return redirect(url_for('signup'))
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
 
 #index route
 @app.route("/")
+@isAuthenticated
 def index():
     allposts = db.child("Posts").get()
     #print(allposts.val(), file=sys.stderr)
@@ -62,15 +63,15 @@ def signup():
         #create the user
         auth.create_user_with_email_and_password(email, password);
         #login the user right away
-        user = auth.sign_in_with_email_and_password(email, password)   
+        user = auth.sign_in_with_email_and_password(email, password)
         #session
         user_id = user['idToken']
         user_email = email
         session['usr'] = user_id
         session["email"] = user_email
-        return redirect("/") 
+        return redirect("/")
       except:
-        return render_template("login.html", message="The email is already taken, try another one, please" )  
+        return render_template("login.html", message="The email is already taken, try another one, please" )
 
     return render_template("signup.html")
 
@@ -90,12 +91,12 @@ def login():
         user_email = email
         session['usr'] = user_id
         session["email"] = user_email
-        return redirect("/")  
-      
-      except:
-        return render_template("login.html", message="Wrong Credentials" )  
+        return redirect("/")
 
-     
+      except:
+        return render_template("login.html", message="Wrong Credentials" )
+
+
     return render_template("login.html")
 
 #logout route
@@ -113,7 +114,7 @@ def logout():
 @app.route("/create", methods=["GET", "POST"])
 @isAuthenticated
 def create():
- 
+
   if request.method == "POST":
     #get the request data
     upload = request.file['upload']
@@ -131,7 +132,7 @@ def create():
       db.child("images/picture1.jpg").push(upload)
       return redirect("/")
     except:
-      return render_template("create.html", message= "Something wrong happened")  
+      return render_template("create.html", message= "Something wrong happened")
 
   return render_template("create.html")
 
@@ -141,7 +142,7 @@ def create():
 def post(id):
     orderedDict = db.child("Posts").order_by_key().equal_to(id).limit_to_first(1).get()
     print(orderedDict, file=sys.stderr)
-        
+
     return render_template("post.html", data=orderedDict)
 
 @app.route("/edit/<id>", methods=["GET", "POST"])
@@ -159,9 +160,9 @@ def edit(id):
 
       #update the post
       db.child("Posts").child(id).update(post)
-      return redirect("/post/" + id) 
-    
-    
+      return redirect("/post/" + id)
+
+
     orderedDict =  db.child("Posts").order_by_key().equal_to(id).limit_to_first(1).get()
     return render_template("edit.html", data=orderedDict)
 

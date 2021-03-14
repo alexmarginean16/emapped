@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="content">
+		<div class="form">
+			<h1 class="huge-title">Welcome &#x1F44B&#x1F3FB</h1>
+			<input type="text" placeholder="Username" name="" class="input" required>
+			<input type="email" placeholder="Email address" name="email" class="input" required>
+			<input type="password" placeholder="Password" name="password" class="input" required>
+			<input type="password" placeholder="Retype password" name="" class="input" required>
+
+			<div style="overflow: hidden;">
+				<input type="submit" value="Sign up" name="" class="submit">
+			</div>
+			<center><p>Already have an account? Login <a href="{{ url_for('login') }}">here</a></p></center>
+		</div>
+	</div>
+</div>
+{% endblock %}
