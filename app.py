@@ -65,7 +65,7 @@ def map():
 @app.route("/profile")
 @isAuthenticated
 def profile():
-  return 'Profile'
+  return 'profile'
 
 #signup route
 @app.route("/signup", methods=["GET", "POST"])
