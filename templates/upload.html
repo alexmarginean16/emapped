@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}Upload{% endblock %}
+
+{% block body %}
+<header>
+	<div class="container">
+		<input type="checkbox" id="nav-check">
+		<div class="nav-header">
+		    <h1>eMapper &#x1F5FA</h1>
+		    <div class="nav-btn">
+			    <i class="fas fa-bars"></i>
+		  	</div>
+		  	<nav>
+		  		<a href="{{ url_for('upload') }}">+</a>
+		  		<a href="{{ url_for('index') }}">Grid View</a>
+			    <a href="{{ url_for('map') }}">Map View</a>
+			    <a href="{{ url_for('profile', email=email) }}">Profile</a>
+		  	</nav>
+		</div>
+	</div>
+</header>
+
+<div class="container">
+	<div class="content">
+		<div class="form">
+			<form method="POST" action="{{ url_for ('upload')}}">
+				{% if message %}
+				<p class="error">{{ message }}</p>
+				{% endif %}
+				<h1 class="huge-title">Upload a photo &#x1F4F7</h1>
+
+				<div class="file-input">
+					<input type="file" id="file" class="file">
+					<label for="file"><span class="file-name">Select file</span></label>
+				</div>
+
+				<div style="overflow: hidden;">
+					<input type="submit" value="Upload" name="" class="submit">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	const file = document.querySelector('#file');
+file.addEventListener('change', (e) => {
+  // Get the selected file
+  const [file] = e.target.files;
+  // Get the file name and size
+  const { name: fileName, size } = file;
+  // Convert size in bytes to kilo bytes
+  const fileSize = (size / 1000).toFixed(2);
+  // Set the text content
+  const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+  document.querySelector('.file-name').textContent = fileNameAndSize;
+});
+</script>
+
+{% endblock %}
