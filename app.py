@@ -8,6 +8,7 @@ from flask import Flask, render_template, flash, redirect, request, url_for, ses
 from werkzeug.utils import secure_filename
 import pyrebase
 import imghdr
+import vision
 
 #firebase config
 config = {
@@ -150,7 +151,7 @@ def upload():
 @app.route("/upload/<filename>")
 @isAuthenticated
 def send_images(filename):
-  return send_from_directory("photos/"+session["email"], filename)
+  return send_from_directory("photos/"+ session["email"], filename)
 
 
 @app.route("/posts")
