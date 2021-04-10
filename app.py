@@ -139,6 +139,18 @@ def upload():
               file_ext != validate_image(uploaded_file.stream):
               abort(400)
       uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+      client, image = vision.getImage(app.config['UPLOAD_PATH'] + "/" + filename)
+      lables = vision.getLables(client, image)
+      moods = vision.getMoods(client, image)
+      colors = vision.getDominantColors(client, image)
+      post = {
+        "name": filename,
+        "lables": lables,
+        "moods": moods,
+        "colors": colors,
+        "email": session["email"]
+      }
+      db.child("Posts").push(post)
   return render_template("upload.html")
 
 @app.route("/upload/<filename>")

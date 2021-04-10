@@ -2,7 +2,7 @@ import io
 import os
 from google.cloud import vision
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "emapped-8fe0781bbd63.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "emapped-a0f2c09d215f.json"
 
 def getImage(image_name):
 	client = vision.ImageAnnotatorClient()
@@ -74,7 +74,7 @@ def getDominantColors(client, image):
 
 	return dominant_colors
 
-client, image = getImage('1.png')
-lables = getLables(client, image)
-moods = getMoods(client, image)
-colors = getDominantColors(client, image)
+# client, image = getImage('1.png')
+# lables = getLables(client, image)
+# moods = getMoods(client, image)
+# colors = getDominantColors(client, image)
