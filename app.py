@@ -16,14 +16,7 @@ client = vision.ImageAnnotatorClient()
 
 #firebase config
 config = {
-    "apiKey": "AIzaSyAKf4sNxkZ3NGqd2pJYrHEN0SJ-abfkLlI",
-    "authDomain": "emapped.firebaseapp.com",
-    "databaseURL": "https://emapped-default-rtdb.firebaseio.com",
-    "projectId": "emapped",
-    "storageBucket": "emapped.appspot.com",
-    "messagingSenderId": "492726205148",
-    "appId": "1:492726205148:web:bba13e995c1ee2cc661219",
-    "measurementId": "G-YV4E96ZP18"
+
 }
 
 #init firebase
