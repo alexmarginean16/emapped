@@ -2,6 +2,7 @@ from functools import wraps
 import sys
 import os
 import io
+import json
 from flask import Flask, render_template, flash, redirect, request, url_for, session, abort, \
     send_from_directory
 #coming from pyrebase4
@@ -11,16 +12,9 @@ import imghdr
 import vision
 
 #firebase config
-config = {
-  "apiKey": "AIzaSyAKf4sNxkZ3NGqd2pJYrHEN0SJ-abfkLlI",
-  "authDomain": "emapped.firebaseapp.com",
-  "databaseURL": "https://emapped-default-rtdb.firebaseio.com",
-  "projectId": "emapped",
-  "storageBucket": "emapped.appspot.com",
-  "messagingSenderId": "492726205148",
-  "appId": "1:492726205148:web:bba13e995c1ee2cc661219",
-  "measurementId": "G-YV4E96ZP18"
-}
+jsonfile = open("firebaseconfig.json")
+config = json.load(jsonfile)
+jsonfile.close()
 
 #init firebase
 firebase = pyrebase.initialize_app(config)
