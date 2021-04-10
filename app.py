@@ -10,7 +10,7 @@ import pyrebase
 import imghdr
 from google.cloud import vision
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "emapped-8b4be6305e9a.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "emapped-8fe0781bbd63.json"
 
 client = vision.ImageAnnotatorClient()
 
