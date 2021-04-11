@@ -43,6 +43,7 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
+    image_names = []
     posts = db.child("Posts").get()
     for post in posts.each():
       city = post.val()['city']
@@ -53,9 +54,9 @@ def index():
       coordinates = post.val()['coordinates']
 
       if session["email"] == email:
-        print(name)
-
-    return render_template("index.html", email=session["email"])
+        image_names.append('photos/' + str(session["email"]) + '/' + name)
+    print(image_names)
+    return render_template("index.html", email=session["email"], image_names=image_names)
 
 @app.route("/map")
 @isAuthenticated
@@ -187,7 +188,7 @@ def send_images(filename):
 @isAuthenticated
 def get_photos():
   image_names = os.listdir('photos/' + session["email"])
-  orderedDict = db.child("Posts").get()
+  # orderedDict = db.child("Posts").get()
   return render_template("post.html", image_names=image_names)
 
 
