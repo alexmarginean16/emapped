@@ -3,6 +3,7 @@ emapped-a0f2c09d215f.json
 .DS_Store
 image.png
 firebaseconfig.json
+static/photos
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
