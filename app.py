@@ -43,25 +43,22 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
-    posts = db.child("Posts").get()
-    for post in posts.each():
-      city = post.val()['city']
-      colors = post.val()['colors']
-      email = post.val()['email']
-      lables = post.val()['lables']
-      name = post.val()['name']
-      coordinates = post.val()['coordinates']
-
-      if session["email"] == email:
-        print(name)
-
     return render_template("index.html", email=session["email"])
 
 @app.route("/map")
 @isAuthenticated
 def map():
-    coordinates = [];
-    return render_template("map.html", email=session["email"], coordinates=[[47.05683055555555, 21.930666666666667], [30.05683055555555, 21.930666666666667]])
+    try:
+      coordinates = [];
+      posts = db.child("Posts").get()
+      for post in posts.each():
+        c = post.val()['coordinates']
+        coordinates.append(c)
+        print(coordinates)
+    except:
+      print("Error")
+
+    return render_template("map.html", email=session["email"], coordinates=coordinates)
 
 @app.route("/profile/<email>")
 @isAuthenticated
