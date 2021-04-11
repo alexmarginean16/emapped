@@ -95,16 +95,16 @@ def signup():
         #create the user
         auth.create_user_with_email_and_password(email, password)
         #login the user right away
-        user = auth.sign_in_with_email_and_password(email, password)   
+        user = auth.sign_in_with_email_and_password(email, password)
         #session
         user_id = user['idToken']
         user_email = email
         session['usr'] = user_id
         session["email"] = user_email
         os.mkdir('static/photos/' + user_email)
-        return redirect("/") 
+        return redirect("/")
       except:
-        return render_template("login.html", message="The email is already taken, try another one, please" )  
+        return render_template("login.html", message="The email is already taken, try another one, please" )
 
     return render_template("signup.html")
 
