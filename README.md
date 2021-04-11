@@ -3,12 +3,12 @@ eMapped is a web application that helps people to manage their photos easily. It
 
 ## Tasks for HackKU Hackathon
 
-- [ ] Finish upload photos form
+- [X] Finish upload photos form
 - [ ] Finish implementing Vision API
-  - [ ] Get info for each photo and store it into the DB
+  - [X] Get info for each photo and store it into the DB
+  - [X] Display pictures in Grid view
   - [ ] Display picture location from database below thumbnail
   - [ ] Display more info while clicking on each picture (pop-up)
-- [ ] Display pictures in Grid view
   - [ ] Finish styling pop-up for picture (it's color should be the dominant color from the pic)
 - [ ] Display pictures based on location in Map view (Maps API)
 - [ ] Finish profile page
