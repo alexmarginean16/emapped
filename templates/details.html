@@ -24,32 +24,26 @@
 </header>
 
 <div class="container">
-			<img src="{{ url_for('static', filename='photos/'+email+'/'+name_ind) }}" style="padding-top: 3%; height:50%; width: 50%;">
+			<center><img src="{{ url_for('static', filename='photos/'+email+'/'+name_ind) }}" style="padding-top: 3%; height:50%; width: 50%;"></center>
 			<div class="modal-text">
 				<h1>&#x1F4CD {{city}}</h1>
+        {% if moods %}
 				<div class="emotion">
-					<p>{{moods}}</p>
+					<p>{{ moods }}</p>
 					<a href="#" class="fas fa-star s1 star"></a>
 					<a href="#" class="fas fa-star s2 star"></a>
 					<a href="#" class="fas fa-star s3 star"></a>
 					<a href="#" class="fas fa-star s4 star"></a>
 					<a href="#" class="fas fa-star s5"></a>
 				</div>
-				<div class="emotion">
-					<p>Happiness</p>
-					<a href="#" class="fas fa-star s1 star"></a>
-					<a href="#" class="fas fa-star s2"></a>
-					<a href="#" class="fas fa-star s3"></a>
-					<a href="#" class="fas fa-star s4"></a>
-					<a href="#" class="fas fa-star s5"></a>
-                </div>
-                <div class="hastags" style="padding-top:1%;">
-                    <p style="display: inline;">Hashtags:
-                    {% for label in lables %}
-                        <p style="display: inline;">#{{ label }}</p>
-                    {% endfor %}
-                    </p>
-                </div>
+        {% endif %}
+        <div class="hastags" style="padding-top:1%;">
+            <p style="display: inline;">Hashtags:
+            {% for label in lables %}
+                <p style="display: inline;">#{{ label }}</p>
+            {% endfor %}
+            </p>
+        </div>
 			</div>
 </div>
 
