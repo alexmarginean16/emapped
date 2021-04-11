@@ -74,7 +74,3 @@ def getDominantColors(client, image):
 
 	return dominant_colors
 
-# client, image = getImage('1.png')
-# lables = getLables(client, image)
-# moods = getMoods(client, image)
-# colors = getDominantColors(client, image)

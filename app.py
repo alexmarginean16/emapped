@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 import pyrebase
 import imghdr
 import vision
+import maps
 
 #firebase config
 jsonfile = open("firebaseconfig.json")
@@ -140,6 +141,9 @@ def upload():
               abort(400)
       uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
       client, image = vision.getImage(app.config['UPLOAD_PATH'] + "/" + filename)
+      coordinates = maps.getCoordinates(app.config['UPLOAD_PATH'] + "/" + filename)
+      coordinates = tuple(coordinates)
+      city = maps.reverseGeocode(coordinates)
       lables = vision.getLables(client, image)
       moods = vision.getMoods(client, image)
       colors = vision.getDominantColors(client, image)
@@ -148,6 +152,8 @@ def upload():
         "lables": lables,
         "moods": moods,
         "colors": colors,
+        "city" : city,
+        "coordinates": coordinates,
         "email": session["email"]
       }
       db.child("Posts").push(post)
@@ -158,12 +164,16 @@ def upload():
 def send_images(filename):
   return send_from_directory("photos/"+ session["email"], filename)
 
+def stream_handler(message):
+  # print(message["data"])
+  print(message["path"])
 
 @app.route("/posts")
 @isAuthenticated
 def get_photos():
   image_names = os.listdir('photos/' + session["email"])
   print(image_names)
+  orderedDict = db.child("Posts").stream(stream_handler)
   return render_template("post.html", image_names=image_names)
 
 
