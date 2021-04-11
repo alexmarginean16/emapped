@@ -169,14 +169,6 @@ def logout():
     session.clear()
     return redirect("/")
 
-def validate_image(stream):
-    header = stream.read(512)  # 512 bytes should be enough for a header check
-    stream.seek(0)  # reset stream pointer
-    format = imghdr.what(None, header)
-    if not format:
-        return None
-    return '.' + (format if format != 'jpeg' else 'jpg')
-
 @app.route("/upload", methods=["GET", "POST"])
 @isAuthenticated
 def upload():
@@ -187,9 +179,6 @@ def upload():
     filename = secure_filename(uploaded_file.filename)
     if filename != '':
       file_ext = os.path.splitext(filename)[1]
-      if file_ext not in app.config['UPLOAD_EXTENSIONS'] or \
-              file_ext != validate_image(uploaded_file.stream):
-              abort(400)
       uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
       client, image = vision.getImage(app.config['UPLOAD_PATH'] + "/" + filename)
       try:
