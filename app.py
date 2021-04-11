@@ -43,9 +43,6 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
-<<<<<<< HEAD
-    return render_template("index.html", email=session["email"])
-=======
     image_names = []
     posts = db.child("Posts").get()
     for post in posts.each():
@@ -60,7 +57,6 @@ def index():
         image_names.append('photos/' + str(session["email"]) + '/' + name)
     print(image_names)
     return render_template("index.html", email=session["email"], image_names=image_names)
->>>>>>> b3bbd89d469a6389fbce7046796480d20128825a
 
 @app.route("/map")
 @isAuthenticated
@@ -175,7 +171,7 @@ def upload():
       except:
         coordinates = []
         city = ""
-      
+
       lables = vision.getLables(client, image)
       moods = vision.getMoods(client, image)
       colors = vision.getDominantColors(client, image)
