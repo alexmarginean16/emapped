@@ -95,18 +95,19 @@ def signup():
         #create the user
         auth.create_user_with_email_and_password(email, password)
         #login the user right away
-        user = auth.sign_in_with_email_and_password(email, password)
+        user = auth.sign_in_with_email_and_password(email, password)   
         #session
         user_id = user['idToken']
         user_email = email
         session['usr'] = user_id
         session["email"] = user_email
-        os.mkdir('photos/' + user_email)
-        return redirect("/")
+        os.mkdir('static/photos/' + user_email)
+        return redirect("/") 
       except:
-        return render_template("login.html", message="The email is already taken, try another one, please" )
+        return render_template("login.html", message="The email is already taken, try another one, please" )  
 
     return render_template("signup.html")
+
 
 
 #login route
@@ -151,7 +152,6 @@ def validate_image(stream):
         return None
     return '.' + (format if format != 'jpeg' else 'jpg')
 
-#upload form
 @app.route("/upload", methods=["GET", "POST"])
 @isAuthenticated
 def upload():
@@ -189,6 +189,20 @@ def upload():
       }
       db.child("Posts").push(post)
   return render_template("upload.html")
+
+@app.route("/upload/<filename>")
+@isAuthenticated
+def send_images(filename):
+  return send_from_directory("photos/"+ session["email"], filename)
+
+
+@app.route("/posts")
+@isAuthenticated
+def get_photos():
+  image_names = os.listdir('photos/' + session["email"])
+  # orderedDict = db.child("Posts").get()
+  return render_template("post.html", image_names=image_names)
+
 
 #run the main script
 if __name__ == "__main__":
