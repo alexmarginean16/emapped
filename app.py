@@ -43,6 +43,7 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
+  try:
     image_names = []
     posts = db.child("Posts").get()
     for post in posts.each():
@@ -56,7 +57,9 @@ def index():
       if session["email"] == email:
         image_names.append('photos/' + str(session["email"]) + '/' + name)
     print(image_names)
-    return render_template("index.html", email=session["email"], image_names=image_names)
+  except:
+    print("ERR")
+  return render_template("index.html", email=session["email"], image_names=image_names)
 
 @app.route("/map")
 @isAuthenticated
@@ -144,7 +147,7 @@ def validate_image(stream):
 @isAuthenticated
 def upload():
   if request.method == "POST":
-    app.config['UPLOAD_PATH'] = 'photos/' + session["email"]
+    app.config['UPLOAD_PATH'] = 'static/photos/' + session["email"]
     uploaded_file = request.files["file"]
 
     filename = secure_filename(uploaded_file.filename)
@@ -177,21 +180,6 @@ def upload():
       }
       db.child("Posts").push(post)
   return render_template("upload.html")
-
-@app.route("/upload/<filename>")
-@isAuthenticated
-def send_images(filename):
-  return send_from_directory("photos/"+ session["email"], filename)
-
-
-@app.route("/posts")
-@isAuthenticated
-def get_photos():
-  image_names = os.listdir('photos/' + session["email"])
-  # orderedDict = db.child("Posts").get()
-  return render_template("post.html", image_names=image_names)
-
-
 
 #run the main script
 if __name__ == "__main__":
