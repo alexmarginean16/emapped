@@ -59,13 +59,22 @@ def index():
     print(image_names)
   except:
     print("ERR")
-  return render_template("index.html", email=session["email"], image_names=image_names)
+  return render_template("index.html", email=session["email"], image_names=image_names, city=city)
 
 @app.route("/map")
 @isAuthenticated
 def map():
-    coordinates = [];
-    return render_template("map.html", email=session["email"], coordinates=[[47.05683055555555, 21.930666666666667], [30.05683055555555, 21.930666666666667]])
+    try:
+      coordinates = [];
+      posts = db.child("Posts").get()
+      for post in posts.each():
+        c = post.val()['coordinates']
+        coordinates.append(c)
+        print(coordinates)
+    except:
+      print("Error")
+
+    return render_template("map.html", email=session["email"], coordinates=coordinates)
 
 @app.route("/profile/<email>")
 @isAuthenticated
@@ -165,7 +174,7 @@ def upload():
       except:
         coordinates = []
         city = ""
-      
+
       lables = vision.getLables(client, image)
       moods = vision.getMoods(client, image)
       colors = vision.getDominantColors(client, image)
