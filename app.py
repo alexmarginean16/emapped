@@ -43,7 +43,24 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
+<<<<<<< HEAD
     return render_template("index.html", email=session["email"])
+=======
+    image_names = []
+    posts = db.child("Posts").get()
+    for post in posts.each():
+      city = post.val()['city']
+      colors = post.val()['colors']
+      email = post.val()['email']
+      lables = post.val()['lables']
+      name = post.val()['name']
+      coordinates = post.val()['coordinates']
+
+      if session["email"] == email:
+        image_names.append('photos/' + str(session["email"]) + '/' + name)
+    print(image_names)
+    return render_template("index.html", email=session["email"], image_names=image_names)
+>>>>>>> b3bbd89d469a6389fbce7046796480d20128825a
 
 @app.route("/map")
 @isAuthenticated
@@ -151,9 +168,14 @@ def upload():
               abort(400)
       uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
       client, image = vision.getImage(app.config['UPLOAD_PATH'] + "/" + filename)
-      coordinates = maps.getCoordinates(app.config['UPLOAD_PATH'] + "/" + filename)
-      coordinates = tuple(coordinates)
-      city = maps.reverseGeocode(coordinates)
+      try:
+        coordinates = maps.getCoordinates(app.config['UPLOAD_PATH'] + "/" + filename)
+        coordinates = tuple(coordinates)
+        city = maps.reverseGeocode(coordinates)
+      except:
+        coordinates = []
+        city = ""
+      
       lables = vision.getLables(client, image)
       moods = vision.getMoods(client, image)
       colors = vision.getDominantColors(client, image)
@@ -174,16 +196,12 @@ def upload():
 def send_images(filename):
   return send_from_directory("photos/"+ session["email"], filename)
 
-def stream_handler(message):
-  # print(message["data"])
-  print(message["path"])
 
 @app.route("/posts")
 @isAuthenticated
 def get_photos():
   image_names = os.listdir('photos/' + session["email"])
-  print(image_names)
-  orderedDict = db.child("Posts").stream(stream_handler)
+  # orderedDict = db.child("Posts").get()
   return render_template("post.html", image_names=image_names)
 
 

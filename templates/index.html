@@ -28,64 +28,41 @@
 			<div class="col">
 				<a id="myBtn">
 					<div class="box">
-						<img src="{{ url_for('static', filename='img/image.png') }}">
-						<h4>&#x1F4CD San Francisco</h4>
-					</div>
-				</a>
-			</div>
-			<div class="col">
-				<a id="myBtn">
-					<div class="box">
-						<img src="{{ url_for('static', filename='img/IMG_4547.jpeg') }}">
-						<h4>&#x1F4CD Sunnyvale</h4>
-					</div>
-				</a>
-			</div>
-			<div id="myModal" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<img src="{{ url_for('static', filename='img/image.png') }}">
-					<div class="modal-text">
-						<h1>&#x1F4CD San Francisco</h1>
-						<div class="emotion">
-							<p>Joy</p>
-							<a href="#" class="fas fa-star s1 star"></a>
-							<a href="#" class="fas fa-star s2 star"></a>
-							<a href="#" class="fas fa-star s3 star"></a>
-							<a href="#" class="fas fa-star s4 star"></a>
-							<a href="#" class="fas fa-star s5"></a>
-						</div>
-						<div class="emotion">
-							<p>Happiness</p>
-							<a href="#" class="fas fa-star s1 star"></a>
-							<a href="#" class="fas fa-star s2"></a>
-							<a href="#" class="fas fa-star s3"></a>
-							<a href="#" class="fas fa-star s4"></a>
-							<a href="#" class="fas fa-star s5"></a>
-						</div>
-						<p>Hashtags: #Hair #Head #Cloud #Sky #Smile #Flash #photography #Jaw #Neck #Sleeve #Standing</p>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<a id="myBtn">
-					<div class="box">
-						<img src="{{ url_for('static', filename='img/IMG_4659.jpeg') }}">
-						<h4>&#x1F4CD San Francisco</h4>
-					</div>
-				</a>
-			</div>
-			<div class="col">
-				<a id="myBtn">
-					<div class="box">
-						<img src="{{ url_for('static', filename='img/image2.png') }}">
-						<h4>&#x1F4CD Oradea</h4>
+						{% for image_name in image_names %}
+							<img src="{{ url_for('photos', filename='{{ image_name }}' }}">
+							<h4>&#x1F4CD San Francisco</h4>
+						{% endfor %}
 					</div>
 				</a>
 			</div>
 		</div>
 	</div>
-
+	<!-- <div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<img src="{{ url_for('static', filename='img/image.png') }}">
+			<div class="modal-text">
+				<h1>&#x1F4CD San Francisco</h1>
+				<div class="emotion">
+					<p>Joy</p>
+					<a href="#" class="fas fa-star s1 star"></a>
+					<a href="#" class="fas fa-star s2 star"></a>
+					<a href="#" class="fas fa-star s3 star"></a>
+					<a href="#" class="fas fa-star s4 star"></a>
+					<a href="#" class="fas fa-star s5"></a>
+				</div>
+				<div class="emotion">
+					<p>Happiness</p>
+					<a href="#" class="fas fa-star s1 star"></a>
+					<a href="#" class="fas fa-star s2"></a>
+					<a href="#" class="fas fa-star s3"></a>
+					<a href="#" class="fas fa-star s4"></a>
+					<a href="#" class="fas fa-star s5"></a>
+				</div>
+				<p>Hashtags: #Hair #Head #Cloud #Sky #Smile #Flash #photography #Jaw #Neck #Sleeve #Standing</p>
+			</div>
+		</div>
+	</div> -->
 	<!--<script type="text/javascript">
 		// Get the modal
 		var modal = document.getElementById("myModal");
