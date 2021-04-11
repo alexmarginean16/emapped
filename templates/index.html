@@ -25,16 +25,16 @@
 
 	<div class="container">
 		<div class="flex-grid">
+			{% for image_name in image_names %}
 			<div class="col">
-				<a id="myBtn">
+				<a href="{{ url_for('details', name=name_ind) }}" id="myBtn">
 					<div class="box">
-						{% for image_name in image_names %}
 							<img src="{{ url_for('static', filename=image_name) }}">
 							<h4>&#x1F4CD {{ city }}</h4>
-						{% endfor %}
 					</div>
 				</a>
 			</div>
+			{% endfor %}
 		</div>
 	</div>
 	<!-- <div id="myModal" class="modal">

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}Details{% endblock %}
+
+{% block bodystyle %}background: #ffffff{% endblock %}
+
+{% block body %}
+<header>
+    <div class="container">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <h1>eMapped &#x1F5FA</h1>
+            <div class="nav-btn">
+                <i class="fas fa-bars"></i>
+              </div>
+              <nav>
+                  <a href="{{ url_for('upload') }}">+</a>
+                  <a href="{{ url_for('index') }}" class="selected">Grid View</a>
+                <a href="{{ url_for('map') }}">Map View</a>
+                <a href="{{ url_for('profile', email=email) }}">Profile</a>
+              </nav>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+			<img src="{{ url_for('static', filename='photos/'+email+'/'+name_ind) }}" style="padding-top: 3%; height:50%; width: 50%;">
+			<div class="modal-text">
+				<h1>&#x1F4CD {{city}}</h1>
+				<div class="emotion">
+					<p>{{moods}}</p>
+					<a href="#" class="fas fa-star s1 star"></a>
+					<a href="#" class="fas fa-star s2 star"></a>
+					<a href="#" class="fas fa-star s3 star"></a>
+					<a href="#" class="fas fa-star s4 star"></a>
+					<a href="#" class="fas fa-star s5"></a>
+				</div>
+				<div class="emotion">
+					<p>Happiness</p>
+					<a href="#" class="fas fa-star s1 star"></a>
+					<a href="#" class="fas fa-star s2"></a>
+					<a href="#" class="fas fa-star s3"></a>
+					<a href="#" class="fas fa-star s4"></a>
+					<a href="#" class="fas fa-star s5"></a>
+                </div>
+                <div class="hastags" style="padding-top:1%;">
+                    <p style="display: inline;">Hashtags:
+                    {% for label in lables %}
+                        <p style="display: inline;">#{{ label }}</p>
+                    {% endfor %}
+                    </p>
+                </div>
+			</div>
+</div>
+
+{% endblock %}

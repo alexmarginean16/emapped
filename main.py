@@ -43,8 +43,9 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
+  image_names = []
+  city = ""
   try:
-    image_names = []
     posts = db.child("Posts").get()
     for post in posts.each():
       city = post.val()['city']
@@ -56,10 +57,34 @@ def index():
 
       if session["email"] == email:
         image_names.append('photos/' + str(session["email"]) + '/' + name)
-    print(image_names)
+      print(image_names)
   except:
     print("ERR")
-  return render_template("index.html", email=session["email"], image_names=image_names, city=city)
+  return render_template("index.html", email=session["email"], image_names=image_names, city=city, name_ind = name)
+
+@app.route("/details/<name>")
+@isAuthenticated
+def details(name):
+  try:
+    image_names = []
+    posts = db.child("Posts").get()
+    for post in posts.each():
+      city = post.val()['city']
+      colors = post.val()['colors']
+      email = post.val()['email']
+      lables = post.val()['lables']
+      name_db = post.val()['name']
+      moods = post.val()['moods']
+      coordinates = post.val()['coordinates']
+
+      if session["email"] == email:
+        image_names.append('photos/' + str(session["email"]) + '/' + name_db)
+    print(name_db)
+  except:
+    print("ERR")
+  return render_template("details.html", email=session["email"], name_ind=name_db, colors=colors, lables=lables, coordinates=coordinates, city=city, moods=moods)
+
+
 
 @app.route("/map")
 @isAuthenticated
