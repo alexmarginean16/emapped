@@ -29,8 +29,8 @@
 				<a id="myBtn">
 					<div class="box">
 						{% for image_name in image_names %}
-							<img src="{{ url_for('photos', filename='{{ image_name }}' }}">
-							<h4>&#x1F4CD San Francisco</h4>
+							<img src="{{ url_for('static', filename=image_name) }}">
+							<h4>&#x1F4CD {{ city }}</h4>
 						{% endfor %}
 					</div>
 				</a>

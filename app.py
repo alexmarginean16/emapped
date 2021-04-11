@@ -43,6 +43,7 @@ def isAuthenticated(f):
 @app.route("/")
 @isAuthenticated
 def index():
+  try:
     image_names = []
     posts = db.child("Posts").get()
     for post in posts.each():
@@ -56,7 +57,9 @@ def index():
       if session["email"] == email:
         image_names.append('photos/' + str(session["email"]) + '/' + name)
     print(image_names)
-    return render_template("index.html", email=session["email"], image_names=image_names)
+  except:
+    print("ERR")
+  return render_template("index.html", email=session["email"], image_names=image_names, city=city)
 
 @app.route("/map")
 @isAuthenticated
