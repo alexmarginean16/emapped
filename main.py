@@ -45,6 +45,7 @@ def isAuthenticated(f):
 def index():
   image_names = []
   city = ""
+  name = ""
   try:
     posts = db.child("Posts").get()
     for post in posts.each():
@@ -65,6 +66,12 @@ def index():
 @app.route("/details/<name>")
 @isAuthenticated
 def details(name):
+  coordinates=[[]]
+  moods=[]
+  city=""
+  lables=[]
+  colors=[]
+  name_db=name
   try:
     image_names = []
     posts = db.child("Posts").get()
