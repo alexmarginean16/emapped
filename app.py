@@ -47,7 +47,7 @@ def index():
 @app.route("/map")
 @isAuthenticated
 def map():
-    return render_template("map.html", email=session["email"])
+    return render_template("map.html", email=session["email"], coordinates=[[47.05683055555555, 21.930666666666667], [30.05683055555555, 21.930666666666667]])
 
 @app.route("/profile/<email>")
 @isAuthenticated

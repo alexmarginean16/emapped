@@ -217,6 +217,13 @@ a {
   cursor: pointer;
 }
 
+/* ---------- MAP VIEW ---------- */
+
+#map {
+	width: 100%;
+	min-height: 550px;
+}
+
 /* ---------- PROFILE PAGE ---------- */
 
 .profile-pic {
